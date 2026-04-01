@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Bui Xuan Bac - Full-Stack Developer & Unity Game Developer. Skilled in C#, Flutter, SQL, and modern web technologies. Open to remote internship opportunities.">
+    <meta name="keywords"
+        content="Full-Stack Developer, Unity Developer, Game Developer, Flutter, C#, SQL, Software Engineer, Web Developer, Mobile Developer, Remote Internship">
+    <meta name="author" content="Bui Xuan Bac">
+    <meta property="og:title" content="Bui Xuan Bac | Full-Stack & Game Developer Portfolio">
+    <meta property="og:description"
+        content="Passionate developer crafting digital experiences across web, mobile, and gaming platforms.">
+    <meta property="og:type" content="website">
+    <title>Bui Xuan Bac | Full-Stack & Game Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+    <!-- Cursor Glow Effect -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- Particle Canvas -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">Portfolio</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <a href="#contact" class="nav-cta">Hire Me</a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-bg-image"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-greeting" data-animate="fade-up">
+                    <span class="greeting-line"></span>
+                    <span class="greeting-text">Hello, I'm</span>
+                </div>
+                <h1 class="hero-name" data-animate="fade-up" data-delay="100">
+                    Bui Xuan <span class="name-highlight">Bac</span>
+                </h1>
+                <p class="hero-subtitle" data-animate="fade-up" data-delay="200">
+                    Full-Stack Developer <span class="subtitle-divider">|</span> Unity Game Developer
+                </p>
+                <p class="hero-description" data-animate="fade-up" data-delay="300">
+                    A versatile developer with hands-on experience in web development, mobile engineering,
+                    and Unity game design. Currently contributing to digital transformation initiatives
+                    and seeking remote internship opportunities to grow with innovative teams.
+                </p>
+                <div class="hero-actions" data-animate="fade-up" data-delay="400">
+                    <a href="#projects" class="btn btn-primary">
+                        <span>View My Work</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#" class="btn btn-outline" id="downloadCvBtn" onclick="generateCV(event)">
+                        <i class="fas fa-download"></i>
+                        <span>Download CV</span>
+                    </a>
+                </div>
+                <div class="hero-stats" data-animate="fade-up" data-delay="500">
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="3">0</span><span class="stat-plus">+</span>
+                        <span class="stat-label">Projects Delivered</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="5">0</span><span class="stat-plus">+</span>
+                        <span class="stat-label">Technologies</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="1">0</span>
+                        <span class="stat-label">Industry Internship</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual" data-animate="fade-left" data-delay="200">
+                <div class="profile-card">
+                    <div class="profile-card-glow"></div>
+                    <div class="profile-image-wrapper">
+                        <img src="assets/images/profile.png" alt="Bui Xuan Bac - Full-Stack Developer"
+                            class="profile-image">
+                        <div class="profile-ring"></div>
+                    </div>
+                    <div class="profile-status">
+                        <span class="status-dot"></span>
+                        <span>Open to Work</span>
+                    </div>
+                    <div class="floating-badge badge-1">
+                        <i class="fas fa-code"></i>
+                        <span>Full-Stack</span>
+                    </div>
+                    <div class="floating-badge badge-2">
+                        <i class="fas fa-gamepad"></i>
+                        <span>Unity</span>
+                    </div>
+                    <div class="floating-badge badge-3">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span>Flutter</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator" data-animate="fade-up" data-delay="600">
+            <span>Scroll to explore</span>
+            <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about" id="about">
+        <div class="container">
+            <div class="section-header" data-animate="fade-up">
+                <span class="section-number">01.</span>
+                <h2 class="section-title">About Me</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="about-grid">
+                <div class="about-content" data-animate="fade-right">
+                    <h3 class="about-heading">A Developer Who Bridges <span class="text-gradient">Multiple
+                            Platforms</span></h3>
+                    <p class="about-text">
+                        I'm a full-stack developer and Unity game designer who thrives at the intersection of
+                        creativity and engineering. My journey in tech started with a curiosity about how digital
+                        products work — and grew into a passion for building them from the ground up.
+                    </p>
+                    <p class="about-text">
+                        During my internship at <strong>VNPT</strong>, one of Vietnam's leading telecommunications
+                        corporations, I contributed to digital transformation projects across multiple government
+                        levels. This experience gave me a deep appreciation for building scalable, user-centric
+                        solutions that make a real impact on people's lives.
+                    </p>
+                    <p class="about-text">
+                        Beyond web and mobile development, I design engaging game experiences in Unity —
+                        combining technical problem-solving with creative storytelling. I believe great software
+                        is born where technical excellence meets thoughtful design.
+                    </p>
+                    <div class="about-highlights">
+                        <div class="highlight-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>End-to-end development: from SRS documentation to deployment</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Experienced in Agile workflows and team collaboration</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Strong analytical thinking and problem-solving mindset</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Quick learner with adaptability to new technologies</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-info" data-animate="fade-left">
+                    <div class="info-card">
+                        <div class="info-card-header">
+                            <i class="fas fa-user"></i>
+                            <span>Quick Info</span>
+                        </div>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-label">Name</span>
+                                <span class="info-value">Bui Xuan Bac</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Role</span>
+                                <span class="info-value">Full-Stack / Game Dev</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Location</span>
+                                <span class="info-value">Vietnam 🇻🇳</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Availability</span>
+                                <span class="info-value status-available">Remote Internship</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Languages</span>
+                                <span class="info-value">Vietnamese, English</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Education</span>
+                                <span class="info-value">Software Engineering</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="strengths-card">
+                        <h4 class="strengths-title">
+                            <i class="fas fa-bolt"></i> Strengths & Growth
+                        </h4>
+                        <div class="strengths-list">
+                            <div class="strength-tag positive">
+                                <i class="fas fa-plus"></i> Versatile tech stack
+                            </div>
+                            <div class="strength-tag positive">
+                                <i class="fas fa-plus"></i> Self-driven learner
+                            </div>
+                            <div class="strength-tag positive">
+                                <i class="fas fa-plus"></i> Documentation skills
+                            </div>
+                            <div class="strength-tag positive">
+                                <i class="fas fa-plus"></i> Problem decomposition
+                            </div>
+                            <div class="strength-tag growth">
+                                <i class="fas fa-arrow-up"></i> Scaling to larger teams
+                            </div>
+                            <div class="strength-tag growth">
+                                <i class="fas fa-arrow-up"></i> Cloud & DevOps exposure
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section skills" id="skills">
+        <div class="container">
+            <div class="section-header" data-animate="fade-up">
+                <span class="section-number">02.</span>
+                <h2 class="section-title">Skills & Tools</h2>
+                <div class="section-line"></div>
+            </div>
+            <p class="section-subtitle" data-animate="fade-up">Technologies I use to bring ideas to life</p>
+            <div class="skills-grid">
+                <!-- Frontend -->
+                <div class="skill-category" data-animate="fade-up" data-delay="0">
+                    <div class="skill-category-header">
+                        <div class="skill-icon-wrapper frontend">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h3>Frontend</h3>
+                    </div>
+                    <div class="skill-tags">
+                        <div class="skill-tag">
+                            <i class="fab fa-html5"></i>
+                            <span>HTML5</span>
+                        </div>
+                        <div class="skill-tag">
+                            <i class="fab fa-css3-alt"></i>
+                            <span>CSS3</span>
+                        </div>
+                        <div class="skill-tag">
+                            <i class="fab fa-js-square"></i>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="skill-tag">
+                            <i class="fas fa-code"></i>
+                            <span>Dart</span>
+                        </div>
+                        <div class="skill-tag">
+                            <i class="fas fa-feather-alt"></i>
+                            <span>Flutter</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Backend -->
+                <div class="skill-category" data-animate="fade-up" data-delay="100">
+                    <div class="skill-category-header">
+                        <div class="skill-icon-wrapper backend">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <h3>Backend</h3>
+                    </div>
+                    <div class="skill-tags">
+                        <div class="skill-tag">
+                            <i class="fas fa-code"></i>
+                            <span>C# / .NET</span>
+                        </div>
+                        <div class="skill-tag">
+                            <i class="fas fa-database"></i>
+                            <span>SQL Server</span>
+                        </div>
+                        <div class="skill-tag">
+                            <i class="fas fa-project-diagram"></i>
+                            <span>RESTful APIs</span>
+                        </div>
+                        <div class="skill-tag">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>JWT Auth</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Game Dev -->
+                <div class="skill-category" data-animate="fade-up" data-delay="200">
+                    <div class="skill-category-header">
+                        <div class="skill-icon-wrapper gamedev">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <h3>Game Development</h3>
+                    </div>
+                    <div class="skill-tags">
+                        <div class="skill-tag">
+                            <i class="fas fa-cube"></i>
+                            <span>Unity Engine</span>
+                        </div>
+                        <div class="skill-tag">
+                            <i class="fas fa-code"></i>
+                            <span>C# Scripting</span>
+                        </div>
+                        <div class="skill-tag">
+                            <i class="fas fa-puzzle-piece"></i>
+                            <span>Game Design</span>
+                        </div>
+                        <div class="skill-tag">
+                            <i class="fas fa-shapes"></i>
+                            <span>2D / 3D</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tools & Workflow -->
+                <div class="skill-category" data-animate="fade-up" data-delay="300">
+                    <div class="skill-category-header">
+                        <div class="skill-icon-wrapper tools">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3>Tools & Workflow</h3>
+                    </div>
+                    <div class="skill-tags">
+                        <div class="skill-tag">
+                            <i class="fab fa-figma"></i>
+                            <span>Figma</span>
+                        </div>
+                        <div class="skill-tag">
+                            <i class="fab fa-git-alt"></i>
+                            <span>Git / GitHub</span>
+                        </div>
+                        <div class="skill-tag">
+                            <i class="fas fa-file-alt"></i>
+                            <span>SRS Docs</span>
+                        </div>
+                        <div class="skill-tag">
+                            <i class="fas fa-tasks"></i>
+                            <span>Agile / Scrum</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section projects" id="projects">
+        <div class="container">
+            <div class="section-header" data-animate="fade-up">
+                <span class="section-number">03.</span>
+                <h2 class="section-title">Featured Projects</h2>
+                <div class="section-line"></div>
+            </div>
+            <p class="section-subtitle" data-animate="fade-up">A selection of projects I've designed and developed</p>
+
+            <!-- Project 1: QR Banking -->
+            <div class="project-card project-featured" data-animate="fade-up">
+                <div class="project-image-wrapper qr-bg">
+                    <div class="project-placeholder">
+                        <div class="project-placeholder-icon qr">
+                            <i class="fas fa-qrcode"></i>
+                        </div>
+                        <div class="project-placeholder-title">Restaurant Management System</div>
+                        <div class="project-placeholder-tags">
+                            <span>QR Ordering</span>
+                            <span>Real-time</span>
+                            <span>Full-Stack</span>
+                        </div>
+                    </div>
+                    <div class="project-image-overlay">
+                        <a href="https://github.com/Tungnl04/PRN232" class="project-link-btn" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <span class="project-label">Featured Project</span>
+                    <h3 class="project-name">QR Banking Restaurant</h3>
+                    <div class="project-description">
+                        <p>
+                            A comprehensive restaurant management web application that streamlines the dining
+                            experience through QR code technology. Customers scan table-specific QR codes to
+                            browse menus, place orders, and process payments — eliminating wait times and
+                            reducing operational overhead for restaurant staff.
+                        </p>
+                    </div>
+                    <div class="project-tech">
+                        <span>C# / .NET</span>
+                        <span>SQL Server</span>
+                        <span>REST API</span>
+                        <span>QR Integration</span>
+                        <span>JWT Auth</span>
+                        <span>SignalR</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Tungnl04/PRN232" class="project-link" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="fab fa-github"></i> Source Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2: Shadow Swap -->
+            <div class="project-card project-featured reverse" data-animate="fade-up">
+                <div class="project-image-wrapper game-bg">
+                    <div class="project-placeholder">
+                        <div class="project-placeholder-icon game">
+                            <i class="fas fa-ghost"></i>
+                        </div>
+                        <div class="project-placeholder-title">Puzzle Game Experience</div>
+                        <div class="project-placeholder-tags">
+                            <span>Unity</span>
+                            <span>Light & Shadow</span>
+                            <span>Puzzle</span>
+                        </div>
+                    </div>
+                    <div class="project-image-overlay">
+                        <a href="https://github.com/bactiger1508/ShadowSwap" class="project-link-btn" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <span class="project-label">Game Project</span>
+                    <h3 class="project-name">Shadow Swap</h3>
+                    <div class="project-description">
+                        <p>
+                            An atmospheric puzzle game built in Unity where players manipulate light and shadow
+                            to solve environmental challenges. Features a unique mechanic where the player
+                            character swaps between physical and shadow forms, each with distinct abilities
+                            that must be strategically combined to progress through increasingly complex levels.
+                        </p>
+                    </div>
+                    <div class="project-tech">
+                        <span>Unity Engine</span>
+                        <span>C#</span>
+                        <span>2D Physics</span>
+                        <span>Game Design</span>
+                        <span>Level Design</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/bactiger1508/ShadowSwap" class="project-link" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="fab fa-github"></i> Source Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3: Personal Health Record -->
+            <div class="project-card project-featured" data-animate="fade-up">
+                <div class="project-image-wrapper health-bg">
+                    <div class="project-placeholder">
+                        <div class="project-placeholder-icon health">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <div class="project-placeholder-title">Digital Health Platform</div>
+                        <div class="project-placeholder-tags">
+                            <span>Flutter</span>
+                            <span>Medical Records</span>
+                            <span>Mobile</span>
+                        </div>
+                    </div>
+                    <div class="project-image-overlay">
+                        <a href="https://github.com/bactiger1508/PRM_PHR" class="project-link-btn" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <span class="project-label">Mobile Application</span>
+                    <h3 class="project-name">Personal Health Record</h3>
+                    <div class="project-description">
+                        <p>
+                            A Flutter-based mobile application that empowers users to manage their medical
+                            records digitally. Features include patient profile creation, family member
+                            linking, document management for lab results and prescriptions, and a medical
+                            history timeline — all wrapped in an intuitive, privacy-first interface.
+                        </p>
+                    </div>
+                    <div class="project-tech">
+                        <span>Flutter / Dart</span>
+                        <span>REST API</span>
+                        <span>Material Design</span>
+                        <span>State Management</span>
+                        <span>Healthcare UX</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/bactiger1508/PRM_PHR" class="project-link" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="fab fa-github"></i> Source Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="section experience" id="experience">
+        <div class="container">
+            <div class="section-header" data-animate="fade-up">
+                <span class="section-number">04.</span>
+                <h2 class="section-title">Experience</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item" data-animate="fade-up">
+                    <div class="timeline-marker">
+                        <div class="timeline-dot"></div>
+                    </div>
+                    <div class="timeline-card">
+                        <div class="timeline-header">
+                            <div class="timeline-title-group">
+                                <h3 class="timeline-role">Software Development Intern</h3>
+                                <span class="timeline-company">
+                                    <i class="fas fa-building"></i> VNPT — Vietnam Posts and Telecommunications Group
+                                </span>
+                            </div>
+                            <span class="timeline-date">
+                                <i class="fas fa-calendar-alt"></i> 2025 — Present
+                            </span>
+                        </div>
+                        <div class="timeline-body">
+                            <p>Contributed to enterprise-level digital transformation initiatives serving government
+                                organizations at multiple administrative levels.</p>
+                            <ul class="timeline-list">
+                                <li>Participated in the development and deployment of digital transformation solutions
+                                    for provincial and district-level government agencies</li>
+                                <li>Collaborated with cross-functional teams to gather requirements, design system
+                                    architectures, and implement software modules</li>
+                                <li>Gained hands-on experience with large-scale enterprise systems, database management,
+                                    and secure API development</li>
+                                <li>Authored technical documentation including Software Requirements Specifications
+                                    (SRS) and system design documents</li>
+                            </ul>
+                            <div class="timeline-tags">
+                                <span>Digital Transformation</span>
+                                <span>Enterprise Software</span>
+                                <span>Technical Documentation</span>
+                                <span>Government IT</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-animate="fade-up">
+                    <div class="timeline-marker">
+                        <div class="timeline-dot"></div>
+                    </div>
+                    <div class="timeline-card">
+                        <div class="timeline-header">
+                            <div class="timeline-title-group">
+                                <h3 class="timeline-role">Freelance Developer & Student Projects</h3>
+                                <span class="timeline-company">
+                                    <i class="fas fa-laptop-code"></i> Independent / University
+                                </span>
+                            </div>
+                            <span class="timeline-date">
+                                <i class="fas fa-calendar-alt"></i> 2023 — Present
+                            </span>
+                        </div>
+                        <div class="timeline-body">
+                            <p>Designed and built multiple full-stack applications, mobile apps, and game projects —
+                                from initial concept through deployment.</p>
+                            <ul class="timeline-list">
+                                <li>Led the development of QR Banking Restaurant, a full-stack web app for restaurant
+                                    management with real-time order processing</li>
+                                <li>Built Shadow Swap, an original Unity puzzle game featuring innovative light/shadow
+                                    swap mechanics</li>
+                                <li>Developed Personal Health Record, a Flutter-based mobile app for managing medical
+                                    documents and family health profiles</li>
+                                <li>Practiced Agile methodology with iterative sprints and continuous integration across
+                                    all projects</li>
+                            </ul>
+                            <div class="timeline-tags">
+                                <span>Full-Stack Web</span>
+                                <span>Unity / C#</span>
+                                <span>Flutter</span>
+                                <span>Project Leadership</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <div class="section-header" data-animate="fade-up">
+                <span class="section-number">05.</span>
+                <h2 class="section-title">Get In Touch</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="contact-content" data-animate="fade-up">
+                <div class="contact-intro">
+                    <h3 class="contact-heading">Let's Build Something <span class="text-gradient">Together</span></h3>
+                    <p class="contact-text">
+                        I'm currently looking for remote internship opportunities where I can contribute,
+                        learn, and grow with a forward-thinking team. Whether you have a project in mind,
+                        a question, or just want to say hi — my inbox is always open.
+                    </p>
+                </div>
+                <div class="contact-grid">
+                    <a href="mailto:bacb436@gmail.com" class="contact-card" id="contact-email">
+                        <div class="contact-card-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h4>Email</h4>
+                        <span>bacb436@gmail.com</span>
+                    </a>
+                    <a href="https://github.com/bactiger1508" class="contact-card" target="_blank"
+                        rel="noopener noreferrer" id="contact-github">
+                        <div class="contact-card-icon">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <h4>GitHub</h4>
+                        <span>bactiger1508</span>
+                    </a>
+                    <a href="https://linkedin.com" class="contact-card" target="_blank" rel="noopener noreferrer"
+                        id="contact-linkedin">
+                        <div class="contact-card-icon">
+                            <i class="fab fa-linkedin"></i>
+                        </div>
+                        <h4>LinkedIn</h4>
+                        <span>Connect with me</span>
+                    </a>
+                </div>
+                <a href="mailto:bacb436@gmail.com" class="btn btn-primary btn-large" id="contact-cta">
+                    <span>Say Hello</span>
+                    <i class="fas fa-paper-plane"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <a href="#hero" class="footer-logo">Portfolio</a>
+                <p class="footer-text">Designed & Built by Bui Xuan Bac</p>
+                <div class="footer-socials">
+                    <a href="mailto:bacb436@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                    <a href="https://github.com/bactiger1508" target="_blank" rel="noopener noreferrer"
+                        aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+                <p class="footer-copy">&copy; 2026 Bui Xuan Bac. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
