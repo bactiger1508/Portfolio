@@ -345,6 +345,13 @@ function generateCV(e) {
             
             btn.style.display = 'none'; // hide the download button itself
 
+            // Force all animated elements to be visible so they don't appear blank in the PDF
+            const animatedElements = document.querySelectorAll('[data-animate], .project-card');
+            animatedElements.forEach(el => {
+                el.style.transition = 'none'; // Disable transition for instant display
+                el.classList.add('visible');
+            });
+
             // Capture the whole document body
             html2canvas(body, {
                 scale: window.devicePixelRatio || 2, // Dynamically use device scale
@@ -397,6 +404,9 @@ function generateCV(e) {
                 btn.classList.remove('downloading');
                 btnSpan.textContent = originalText;
                 
+                // Restore transitions
+                animatedElements.forEach(el => el.style.transition = '');
+                
             }).catch(err => {
                 console.error('Canvas generation error:', err);
                 alert('Canvas error: ' + (err.message || err.toString()));
@@ -408,6 +418,9 @@ function generateCV(e) {
                 btn.style.display = '';
                 btn.classList.remove('downloading');
                 btnSpan.textContent = originalText;
+                
+                // Restore transitions
+                animatedElements.forEach(el => el.style.transition = '');
             });
             
         } catch (err) {
