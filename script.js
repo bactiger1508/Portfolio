@@ -374,26 +374,18 @@ function generateCV(e) {
                         throw new Error('jsPDF library not loaded correctly');
                     }
                     
-                    const pdf = new jsPDF('p', 'mm', 'a4');
-                    const pdfWidth = pdf.internal.pageSize.getWidth();
+                    const pdfWidth = 210;
                     const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-                    const pageHeight = pdf.internal.pageSize.getHeight();
                     
-                    let heightLeft = pdfHeight;
-                    let position = 0;
-                    
-                    // First page
-                    pdf.addImage(imgData, 'JPEG', 0, position, pdfWidth, pdfHeight);
-                    heightLeft -= pageHeight;
-                    
-                    // Subsequent pages
-                    while (heightLeft > 0) {
-                        position = heightLeft - pdfHeight;
-                        pdf.addPage();
-                        pdf.addImage(imgData, 'JPEG', 0, position, pdfWidth, pdfHeight);
-                        heightLeft -= pageHeight;
-                    }
-                    
+                    // Create a single custom-sized PDF page that perfectly fits the entire website.
+                    // This prevents CSS cards and text from being chopped in half.
+                    const pdf = new jsPDF({
+                        orientation: canvas.width > canvas.height ? 'landscape' : 'portrait',
+                        unit: 'mm',
+                        format: [pdfWidth, pdfHeight]
+                    });
+
+                    pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
                     pdf.save('BuiXuanBac_Portfolio_UI.pdf');
                 } catch (pdfErr) {
                     console.error('PDF generation error:', pdfErr);
