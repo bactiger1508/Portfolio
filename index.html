@@ -91,8 +91,7 @@
                         <span>View My Work</span>
                         <i class="fas fa-arrow-right"></i>
                     </a>
-                    <a href="portfolio-print.html?print=1" class="btn btn-outline" id="downloadCvBtn" target="_blank"
-                        rel="noopener noreferrer">
+                    <a href="#" onclick="generateCV(event)" class="btn btn-outline" id="downloadCvBtn">
                         <i class="fas fa-download"></i>
                         <span>Download CV</span>
                     </a>
@@ -768,6 +767,8 @@
         </div>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="script.js"></script>
 </body>
 

@@ -314,3 +314,90 @@ function initMobileMenu() {
         }
     });
 }
+
+/* ============================================
+   CV PDF GENERATOR (html2canvas + jsPDF)
+   ============================================ */
+function generateCV(e) {
+    if (e) e.preventDefault();
+    
+    const btn = document.getElementById('downloadCvBtn');
+    const btnSpan = btn.querySelector('span');
+    const originalText = btnSpan.textContent;
+    const body = document.body;
+    
+    // Show loading state
+    btn.classList.add('downloading');
+    btnSpan.textContent = 'Preparing PDF...';
+    
+    // Allow UI to update before long running task
+    setTimeout(() => {
+        try {
+            // Let's prepare the page for capture
+            // Hide things we don't want in PDF: like the navbar, fixed buttons, or animations
+            const navbar = document.getElementById('navbar');
+            const particleCanvas = document.getElementById('particleCanvas');
+            const cursorGlow = document.getElementById('cursorGlow');
+            
+            if (navbar) navbar.style.display = 'none';
+            if (particleCanvas) particleCanvas.style.display = 'none';
+            if (cursorGlow) cursorGlow.style.display = 'none';
+            
+            btn.style.display = 'none'; // hide the download button itself
+
+            // Capture the whole document body
+            html2canvas(body, {
+                scale: 2, // Better resolution
+                useCORS: true,
+                backgroundColor: window.getComputedStyle(body).backgroundColor, // Preserve dark background
+                windowWidth: Math.max(1200, window.innerWidth) // Ensure it captures desktop layout
+            }).then(canvas => {
+                // Restore visibility of elements
+                if (navbar) navbar.style.display = '';
+                if (particleCanvas) particleCanvas.style.display = '';
+                if (cursorGlow) cursorGlow.style.display = '';
+                btn.style.display = '';
+                
+                const imgData = canvas.toDataURL('image/jpeg', 0.95);
+                const { jsPDF } = window.jspdf;
+                
+                // standard A4 width is 210mm
+                const pdfWidth = 210;
+                // calculate proportional height
+                const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+                
+                // Create a single long PDF page that fits the entire site perfectly
+                const doc = new jsPDF({
+                    orientation: canvas.width > canvas.height ? 'landscape' : 'portrait',
+                    unit: 'mm',
+                    format: [pdfWidth, pdfHeight]
+                });
+                
+                doc.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+                doc.save('BuiXuanBac_Portfolio_UI.pdf');
+                
+                // Reset button
+                btn.classList.remove('downloading');
+                btnSpan.textContent = originalText;
+                
+            }).catch(err => {
+                console.error('Canvas generation error:', err);
+                alert('Could not generate PDF. Please try again.');
+                
+                // Restore visibility on error
+                if (navbar) navbar.style.display = '';
+                if (particleCanvas) particleCanvas.style.display = '';
+                if (cursorGlow) cursorGlow.style.display = '';
+                btn.style.display = '';
+                btn.classList.remove('downloading');
+                btnSpan.textContent = originalText;
+            });
+            
+        } catch (err) {
+            console.error('PDF generation setup error:', err);
+            alert('Could not start PDF generation. Please try again.');
+            btn.classList.remove('downloading');
+            btnSpan.textContent = originalText;
+        }
+    }, 100);
+}
