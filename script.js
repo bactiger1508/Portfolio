@@ -347,10 +347,11 @@ function generateCV(e) {
 
             // Capture the whole document body
             html2canvas(body, {
-                scale: 2, // Better resolution
+                scale: window.devicePixelRatio || 2, // Dynamically use device scale
                 useCORS: true,
-                backgroundColor: window.getComputedStyle(body).backgroundColor, // Preserve dark background
-                windowWidth: Math.max(1200, window.innerWidth) // Ensure it captures desktop layout
+                allowTaint: false,
+                backgroundColor: window.getComputedStyle(body).backgroundColor,
+                windowWidth: Math.max(1200, window.innerWidth)
             }).then(canvas => {
                 // Restore visibility of elements
                 if (navbar) navbar.style.display = '';
@@ -358,23 +359,39 @@ function generateCV(e) {
                 if (cursorGlow) cursorGlow.style.display = '';
                 btn.style.display = '';
                 
-                const imgData = canvas.toDataURL('image/jpeg', 0.95);
-                const { jsPDF } = window.jspdf;
-                
-                // standard A4 width is 210mm
-                const pdfWidth = 210;
-                // calculate proportional height
-                const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-                
-                // Create a single long PDF page that fits the entire site perfectly
-                const doc = new jsPDF({
-                    orientation: canvas.width > canvas.height ? 'landscape' : 'portrait',
-                    unit: 'mm',
-                    format: [pdfWidth, pdfHeight]
-                });
-                
-                doc.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
-                doc.save('BuiXuanBac_Portfolio_UI.pdf');
+                try {
+                    const imgData = canvas.toDataURL('image/jpeg', 0.95);
+                    const { jsPDF } = window.jspdf;
+                    
+                    if (!jsPDF) {
+                        throw new Error('jsPDF library not loaded correctly');
+                    }
+                    
+                    const pdf = new jsPDF('p', 'mm', 'a4');
+                    const pdfWidth = pdf.internal.pageSize.getWidth();
+                    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+                    const pageHeight = pdf.internal.pageSize.getHeight();
+                    
+                    let heightLeft = pdfHeight;
+                    let position = 0;
+                    
+                    // First page
+                    pdf.addImage(imgData, 'JPEG', 0, position, pdfWidth, pdfHeight);
+                    heightLeft -= pageHeight;
+                    
+                    // Subsequent pages
+                    while (heightLeft > 0) {
+                        position = heightLeft - pdfHeight;
+                        pdf.addPage();
+                        pdf.addImage(imgData, 'JPEG', 0, position, pdfWidth, pdfHeight);
+                        heightLeft -= pageHeight;
+                    }
+                    
+                    pdf.save('BuiXuanBac_Portfolio_UI.pdf');
+                } catch (pdfErr) {
+                    console.error('PDF generation error:', pdfErr);
+                    alert('PDF generation error: ' + pdfErr.message);
+                }
                 
                 // Reset button
                 btn.classList.remove('downloading');
@@ -382,7 +399,7 @@ function generateCV(e) {
                 
             }).catch(err => {
                 console.error('Canvas generation error:', err);
-                alert('Could not generate PDF. Please try again.');
+                alert('Canvas error: ' + (err.message || err.toString()));
                 
                 // Restore visibility on error
                 if (navbar) navbar.style.display = '';
