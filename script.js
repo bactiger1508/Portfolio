@@ -352,6 +352,25 @@ function generateCV(e) {
                 el.classList.add('visible');
             });
 
+            // Fix HTML2Canvas RTL grid bug by temporarily removing the 'reverse' class
+            const reverseCards = document.querySelectorAll('.project-card.reverse');
+            reverseCards.forEach(el => el.classList.remove('reverse'));
+
+            // Fix gradient text for html2canvas
+            const gradientTexts = document.querySelectorAll('.text-gradient, .rotator-text');
+            gradientTexts.forEach(el => {
+                el.dataset.origBg = el.style.background || '';
+                el.dataset.origFillColor = el.style.webkitTextFillColor || '';
+                el.dataset.origClip = el.style.backgroundClip || '';
+                el.dataset.origWebkitClip = el.style.webkitBackgroundClip || '';
+                
+                el.style.background = 'none';
+                el.style.webkitTextFillColor = 'initial';
+                el.style.backgroundClip = 'initial';
+                el.style.webkitBackgroundClip = 'initial';
+                el.style.color = '#64ffda'; // Use a solid fallback color for the PDF
+            });
+
             // Capture the whole document body
             html2canvas(body, {
                 scale: window.devicePixelRatio || 2, // Dynamically use device scale
@@ -396,8 +415,16 @@ function generateCV(e) {
                 btn.classList.remove('downloading');
                 btnSpan.textContent = originalText;
                 
-                // Restore transitions
+                // Restore transitions, gradients, and layout classes
                 animatedElements.forEach(el => el.style.transition = '');
+                reverseCards.forEach(el => el.classList.add('reverse'));
+                gradientTexts.forEach(el => {
+                    el.style.background = el.dataset.origBg;
+                    el.style.webkitTextFillColor = el.dataset.origFillColor;
+                    el.style.backgroundClip = el.dataset.origClip;
+                    el.style.webkitBackgroundClip = el.dataset.origWebkitClip;
+                    el.style.color = '';
+                });
                 
             }).catch(err => {
                 console.error('Canvas generation error:', err);
@@ -411,8 +438,16 @@ function generateCV(e) {
                 btn.classList.remove('downloading');
                 btnSpan.textContent = originalText;
                 
-                // Restore transitions
+                // Restore transitions, gradients, and layout classes
                 animatedElements.forEach(el => el.style.transition = '');
+                reverseCards.forEach(el => el.classList.add('reverse'));
+                gradientTexts.forEach(el => {
+                    el.style.background = el.dataset.origBg;
+                    el.style.webkitTextFillColor = el.dataset.origFillColor;
+                    el.style.backgroundClip = el.dataset.origClip;
+                    el.style.webkitBackgroundClip = el.dataset.origWebkitClip;
+                    el.style.color = '';
+                });
             });
             
         } catch (err) {
